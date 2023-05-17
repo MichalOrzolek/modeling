@@ -1,12 +1,16 @@
 clear all
 
-% Specify the ARIMA model order
+% This specification was chosen after carefully examining the data and identifying 
+% weekly cyclicality in the data. Other datasets might prove this specification to be wrong.
+% Specify the ARIMA model order:
 p = 8; % Autoregressive (AR) order
 d = 1; % Differencing order
 q = 7; % Moving average (MA) order
-train_frac = 0.8;   % 80% of the data is for training
-profit_margin= 0.15; % percentage of revenue withheld as profit
+train_frac = 0.8;   % 0.8 of the data is used for training
+profit_margin = 0.15; % percentage of revenue withheld as profit
+avg_revenue = 23; % avg revenue per customer 
 
+% read cvs file with dates in the first column and values in the second column
 t = readtable('data_matlab_wdays.csv');
 dates = datetime(t.Var1, 'InputFormat', 'dd-MM-yyyy');
 values = t.Var2;
@@ -43,10 +47,11 @@ ylabel('Value')
 title('Time Series Forecasting using ARIMA')
 hold off
 
-%revenue and profit calculation
-revenue = 23*tt.values;
+% Revenue and profit calculation
+revenue = avg_revenue*tt.values;
 profit=revenue*profit_margin;
 sales_tt=timetable(tt.dates,revenue,profit);
+% Group sales by month
 monthly_tt = retime(sales_tt, 'monthly', 'sum');
 
 % Create a bar chart of the monthly Revenue and Profit
