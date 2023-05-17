@@ -1,2 +1,2 @@
 # Modeling
-# A collection of codes regarding modeling in various languages 
+A collection of modeling codes in various languages
