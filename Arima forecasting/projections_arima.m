@@ -1,4 +1,4 @@
-% Code by Michal Orzolek (2022)
+% Copyright (C) 2023 Michal Orzolek
 
 % The model is a sales projection of a small grocery shop using autoregressive integrated moving average model.
 % This specification was chosen after carefully examining the data and identifying 
