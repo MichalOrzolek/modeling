@@ -1,7 +1,11 @@
-clear all
+% Code by Michal Orzolek (2022)
 
+% The model is a sales projection of a small grocery shop using autoregressive integrated moving average model.
 % This specification was chosen after carefully examining the data and identifying 
-% weekly cyclicality in the data. Other datasets might prove this specification to be wrong.
+% weekly cyclicality. Other datasets might prove this specification to be wrong.
+
+
+clear all
 % Specify the ARIMA model order:
 p = 8; % Autoregressive (AR) order
 d = 1; % Differencing order
