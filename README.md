@@ -1,2 +1,2 @@
 # Modeling
-A collection of models in various languages
+A collection of scripts, models and projects
