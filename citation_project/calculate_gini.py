@@ -42,10 +42,8 @@ rd_educ = [0.57, 0.45, 0.33, 0.37, 0.63, 0.04, 0.59, 0.75, 0.47, 0.53, 0.44, 0.7
 rd_gov = [0.37, 0.25, 0.2, 0.25, 0.11, 0.13, 0.31, 0.14, 0.03, 0.07, 0.31, 0.24, 0.05, 0.094, 0.17, 0.22, 0.19, 0.25, 0.17]
 rd_zipped = tuple(zip(rd_educ, rd_gov))
 rd_df = pd.DataFrame(rd_zipped, columns=['rd_educ', 'rd_gov'])
-print(rd_df)
 
 df_spending = pd.DataFrame(tertiary_spending, columns = ['Country', 'Spending', 'Population'])
-#print(df_spending)
 file_name = f'spending.xlsx'
 with pd.ExcelWriter(file_name, engine='openpyxl') as writer:
     df_spending.to_excel(writer,sheet_name='Sheet_1', index=False)
@@ -56,9 +54,7 @@ df = pd.read_excel(file_path)
 sum_by_country = df.groupby('Country')['Citations'].sum().reset_index()
 merged_sum = pd.merge(df_spending, sum_by_country, on='Country', how='left')
 
-merged_sum['Efficiency'] = merged_sum['Citations'] / merged_sum['Spending']
-
-#count countries
+#count scientists in each country
 country_counts = df['Country'].value_counts()
 
 df_counts = df['Country'].value_counts().reset_index()
@@ -90,7 +86,7 @@ regression_df = pd.merge(regression_df, gini_results_hindex, on='Country', how='
 regression_df = pd.merge(regression_df, gini_results_i10index, on='Country', how='left')
 regression_df = pd.merge(regression_df, df_spending, on='Country', how='left')
 
-#multiplication because only 25% of top scientists from a given country are included
+#multiplication because only top 25% of scientists from each country are included
 regression_df['Per mln'] = (regression_df['Count']/regression_df['Population'])*4000000 
 regression_df = regression_df.dropna()
 regression_df = regression_df.drop([18])
