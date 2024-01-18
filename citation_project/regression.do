@@ -1,5 +1,3 @@
-use "C:\Users\micha\OneDrive\Pulpit\projekt ekonomia nierownosci\regression_data.dta"
-
 gen ln_mln = ln(permln)
 gen ln_i10 = ln(i10gini)
 gen ln_h = ln(hgini)
